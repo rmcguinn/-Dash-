@@ -2,6 +2,8 @@ let countdown;
 const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
 const buttons = document.querySelectorAll('[data-time]');
+const alarm = document.querySelector('.alarmFX');
+// const test = document.querySelector('.timer__controls');
 
 function timer(seconds) {
   // clear any existing timers
@@ -18,7 +20,12 @@ function timer(seconds) {
     if(secondsLeft < 0) {
       clearInterval(countdown);
       return;
+    } 
+    else if (secondsLeft == 0) {
+      console.log('DONE');
+      alarm.play();
     }
+
     // display it
     displayTimeLeft(secondsLeft);
   }, 1000);
