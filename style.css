@@ -15,7 +15,7 @@ body {
   font-family: 'Inconsolata', monospace;
 }
 
-.display__time-left {
+.display__time-left, .clock {
   font-weight: 100;
   font-size: 20rem;
   margin: 0;
