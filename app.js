@@ -5,6 +5,8 @@ const buttons = document.querySelectorAll('[data-time]');
 const alarm = document.querySelector('.alarmFX');
 const test = document.querySelector('.timer__controls');
 const clock = document.querySelector('.clock');
+const dateSelector = document.querySelector('.date');
+let weather;
 
 function timer(seconds) {
   // clear any existing timers
@@ -97,6 +99,7 @@ function displayClock() {
   const refresh = setTimeout(displayClock, 500);
   if (countdown) { 
     clock.textContent = "";
+    timerDisplay.style.margin = '0';
   }
   else {
     clock.textContent = `${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
@@ -104,3 +107,73 @@ function displayClock() {
 }
 
 displayClock();
+
+
+
+
+// Date Stuff
+function todaysDate() {
+  let bacon = new Date();
+  let date = bacon.getDate();
+  let day = bacon.getDay() + 1;
+  
+  if (day == 1) day = 'Sunday';
+  else if (day == 2) day = 'Monday';
+  else if (day == 3) day = 'Tuesday';
+  else if (day == 4) day = 'Wednesday';
+  else if (day == 5) day = 'Thursday';
+  else if (day == 6) day = 'Friday';
+  else if (day == 7) day = 'Saturday';
+  
+  let month = bacon.getMonth() + 1;
+  
+  if (month == 1) month = 'January';
+  else if (month == 2) month = 'February';
+  else if (month == 3) month = 'March';
+  else if (month == 4) month = 'April';
+  else if (month == 5) month = 'May';
+  else if (month == 6) month = 'June';
+  else if (month == 7) month = 'July';
+  else if (month == 8) month = 'August';
+  else if (month == 9) month = 'September';
+  else if (month == 10) month = 'October';
+  else if (month == 11) month = 'November';
+  else if (month == 12) month = 'December';
+
+  console.log('Today is ' + day + ' ' + month + ' ' + date + 'th');
+  dateSelector.textContent = day + ' ' + month + ' ' + date + 'th';
+}
+
+todaysDate();
+
+
+
+
+
+// Weather Stuff
+
+function readJSON(file) {
+  const request = new XMLHttpRequest();
+  request.open('GET', file, false);
+  request.send(null);
+  if (request.status == 200)
+    return request.responseText;
+};
+
+weather = JSON.parse(readJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
+let today = Math.round(weather.list[0].main.temp);
+let city = weather.city.name;
+let desc = weather.list[0].weather[0].main;
+console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'y');
+
+// function gotWeather() {
+//   loadJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial');
+// }
+
+// function gotData(data) {
+//   weather = data;
+//   console.log(weather);
+// }
+
+// gotWeather();
+// gotData();
