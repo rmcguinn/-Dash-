@@ -1,4 +1,4 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-/style/weather-icons-wind.css /style/weather-icons-wind.min.css /style/weather-icons.css /style/weather-icons.min.css linguist-vendored
+*.css linguist-vendored
