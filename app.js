@@ -162,25 +162,17 @@ function readJSON(file) {
     return request.responseText;
 };
 
-weather = JSON.parse(readJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
-let today = Math.round(weather.list[0].main.temp);
-let city = weather.city.name;
-let desc = weather.list[0].weather[0].main;
-let icon = weather.list[0].weather[0].icon;
-let iconLink = 'http://openweathermap.org/img/w/' + icon + '.png';
-weatherSelector.textContent = 'Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing';
-// iconSelector.src = iconLink;
-console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing');
-console.log(iconLink);
+function weatherCenter() {
+  weather = JSON.parse(readJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
+  let today = Math.round(weather.list[0].main.temp);
+  let city = weather.city.name;
+  let desc = weather.list[0].weather[0].main;
+  let weatherCode = 600;
+  let icon = 'wi-owm-' + weatherCode;
+  if (weatherCode) iconSelector.classList.add(icon);
+  weatherSelector.textContent = today + '°' + ' F and ' + desc + 'ing';
+  console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing');
+  setTimeout(weatherCenter, 60000);
+};
 
-// function gotWeather() {
-//   loadJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial');
-// }
-
-// function gotData(data) {
-//   weather = data;
-//   console.log(weather);
-// }
-
-// gotWeather();
-// gotData();
+weatherCenter();
