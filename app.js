@@ -6,6 +6,8 @@ const alarm = document.querySelector('.alarmFX');
 const test = document.querySelector('.timer__controls');
 const clock = document.querySelector('.clock');
 const dateSelector = document.querySelector('.date');
+const weatherSelector = document.querySelector('.weather');
+const iconSelector = document.querySelector('.weatherIcon');
 let weather;
 
 function timer(seconds) {
@@ -110,8 +112,8 @@ displayClock();
 
 
 
-
 // Date Stuff
+
 function todaysDate() {
   let bacon = new Date();
   let date = bacon.getDate();
@@ -164,7 +166,12 @@ weather = JSON.parse(readJSON('http://api.openweathermap.org/data/2.5/forecast?i
 let today = Math.round(weather.list[0].main.temp);
 let city = weather.city.name;
 let desc = weather.list[0].weather[0].main;
-console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'y');
+let icon = weather.list[0].weather[0].icon;
+let iconLink = 'http://openweathermap.org/img/w/' + icon + '.png';
+weatherSelector.textContent = 'Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing';
+// iconSelector.src = iconLink;
+console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing');
+console.log(iconLink);
 
 // function gotWeather() {
 //   loadJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial');

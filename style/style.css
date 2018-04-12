@@ -88,3 +88,18 @@ body {
   font-size: 4rem;
   color:white;
 }
+
+.weather_container {
+  display: flex;
+}
+
+.weatherIcon {
+  font-size: 8rem;
+  color: #fff;
+}
+
+.weather {
+  display: inline-block;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-left: 20px;
