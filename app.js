@@ -163,7 +163,7 @@ function readJSON(file) {
 };
 
 function weatherCenter() {
-  weather = JSON.parse(readJSON('http://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
+  weather = JSON.parse(readJSON('https://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
   let today = Math.round(weather.list[0].main.temp);
   let city = weather.city.name;
   let desc = weather.list[0].weather[0].main;
