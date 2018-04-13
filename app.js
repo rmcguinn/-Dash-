@@ -8,7 +8,9 @@ const clock = document.querySelector('.clock');
 const dateSelector = document.querySelector('.date');
 const weatherSelector = document.querySelector('.weather');
 const iconSelector = document.querySelector('.weatherIcon');
+const citySelector = document.querySelector('.location');
 let weather;
+const displayContainer = document.querySelector('.display_container');
 
 function timer(seconds) {
   // clear any existing timers
@@ -71,6 +73,7 @@ function displayEndTime(timestamp) {
   }
   const minutes = end.getMinutes();
   const ampm = hour < 12 ? 'AM' : 'PM';
+  displayContainer.style.display = 'block'; // Brings the element back into the layout when alarm is running
   endTime.textContent = `Be Back At ${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
 }
 
@@ -149,6 +152,27 @@ function todaysDate() {
 todaysDate();
 
 
+// Location *WIP* Still need to make fallback work for denied location
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  }
+  else {
+    console.log("Geolocation is not supported by this browser");
+  }
+}
+
+
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude);
+  let userLat = position.coords.latitude;
+  console.log("Longitude: " + position.coords.longitude);
+  let userLong = position.coords.longitude;
+  weatherCenter(userLat, userLong);
+}
+
+getLocation();
 
 
 
@@ -162,17 +186,26 @@ function readJSON(file) {
     return request.responseText;
 };
 
-function weatherCenter() {
-  weather = JSON.parse(readJSON('https://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
+// Seattle JSON https://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial
+
+function weatherCenter(userLat, userLong) {
+  weather = JSON.parse(readJSON('https://api.openweathermap.org/data/2.5/forecast?lat=' + userLat + '&lon=' + userLong + '&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
   let today = Math.round(weather.list[0].main.temp);
   let city = weather.city.name;
   let desc = weather.list[0].weather[0].main;
-  let weatherCode = 600;
+  let weatherCode = weather.list[0].weather[0].id;
   let icon = 'wi-owm-' + weatherCode;
-  if (weatherCode) iconSelector.classList.add(icon);
-  weatherSelector.textContent = today + '°' + ' F and ' + desc + 'ing';
+
+  // Displays error message if no weather info is found
+
+  if (weatherCode) { 
+    iconSelector.classList.add(icon);
+    weatherSelector.textContent = today + '°' + 'F';
+    citySelector.textContent = city;
+  } else { 
+    weatherSelector.textContent = 'No Weather Info Available';
+  }
   console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing');
   setTimeout(weatherCenter, 60000);
 };
 
-weatherCenter();

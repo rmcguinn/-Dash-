@@ -76,6 +76,10 @@ body {
   outline:0;
 }
 
+.display_container {
+  display: none;  /* Keeps element out of the layout until the alarm is running (handles by JS) */
+}
+
 .display {
   flex:1;
   display:flex;
@@ -91,22 +95,28 @@ body {
 
 .weather_container {
   display: flex;
+  height: 10vh;
+  align-items: center;
 }
 
 .weatherIcon {
   font-size: 8rem;
-  color: #f5f5f5;
-  ;
+  color: #f0f0f0; /* Slightly darker than the other whites for more of a visual match */
+  text-shadow:3px 3px 0 rgba(0, 0, 0, 0.05);
 }
 
 .weather {
   display: inline-block;
-  font-size: 2.5rem;
-  margin-left: 20px;
+  margin: 0 0 0 40px;
   color:#f5f5f5;
   text-shadow:4px 4px 0 rgba(0, 0, 0, 0.05);
   font-weight: 100;
-  font-size: 4.5rem;
+  font-size: 6rem;
+}
 
-
-/* Icon and Font are aligned perfectly at 2.5rem but offcentered when changed */
+.location {
+  font-size: 3rem;
+  color: #ddd;
+  font-weight: 100;
+  margin: 25px 0 0 0;
+}
