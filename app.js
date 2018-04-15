@@ -132,7 +132,13 @@ function todaysDate() {
   let bacon = new Date();
   let date = bacon.getDate();
   let day = bacon.getDay() + 1;
+  let suffix = 'th';
   
+  if (date == '1' || date == '21' || date == '31') suffix = 'st';
+  else if (date == '2' || date == '22') suffix = 'nd';
+  else if (date == '3' || date == '23') suffix = 'rd';
+  else suffix = 'th';
+
   if (day == 1) day = 'Sunday';
   else if (day == 2) day = 'Monday';
   else if (day == 3) day = 'Tuesday';
@@ -156,8 +162,8 @@ function todaysDate() {
   else if (month == 11) month = 'November';
   else if (month == 12) month = 'December';
 
-  console.log('Today is ' + day + ' ' + month + ' ' + date + 'th');
-  dateSelector.textContent = day + ' ' + month + ' ' + date + 'th';
+  console.log('Today is ' + day + ' ' + month + ' ' + date + suffix);
+  dateSelector.textContent = day + ' ' + month + ' ' + date + suffix;
 }
 
 todaysDate();
