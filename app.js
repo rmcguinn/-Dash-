@@ -85,6 +85,9 @@ function displayEndTime(timestamp) {
 function startTimer() {
   const seconds = parseInt(this.dataset.time);
   timer(seconds);
+  // Smoothes out the timer fade in and reworks the spacing when the timer starts
+  clock.style.display = 'none';
+  timerDisplay.style.margin = '50px';
 }
 
 
@@ -108,8 +111,11 @@ function displayClock() {
   const ampm = hour < 12 ? 'AM' : 'PM';
   const refresh = setTimeout(displayClock, 500);
   if (countdown) { 
-    clock.textContent = "";
-    timerDisplay.style.margin = '0';
+    // *WIP* needs to be refactored.  
+
+    // clock.textContent = "";
+    // clock.style.display = 'none';
+    // timerDisplay.style.margin = '0';
   }
   else {
     clock.textContent = `${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
@@ -210,7 +216,7 @@ function weatherCenter(userLat, userLong) {
     weatherSelector.textContent = 'No Weather Info Available';
   }
   console.log('Current Weather in ' + city + ' is ' + today + ' °' + unitsSymbol + ' and ' + desc + 'ing');
-  setTimeout(weatherCenter, 60000);
+  setTimeout(weatherCenter, 45000);
 };
 
 function unitsChange() {
@@ -218,11 +224,12 @@ function unitsChange() {
     const todayInC = Math.round((today - 32) * .5556);
     unitsSymbol = 'C';
     weatherSelector.textContent = todayInC + '°' + unitsSymbol;
-    console.log(todayInC + ' °' + unitsSymbol);
+    console.log('Converted to Celcius');
   }
   else {
     unitsSymbol = 'F';
     weatherSelector.textContent = today + '°' + unitsSymbol;
+    console.log('Converted to Fahrenheit');
   }
 }
 
@@ -230,6 +237,3 @@ function unitsChange() {
 iconSelector.addEventListener('click', function() {
     unitsChange();
 });
-
-
-// Attempting to make click event on weather icon to swap today to celcius. Undo it if necessary. *WIP* *URGENT*
