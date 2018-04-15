@@ -103,6 +103,7 @@ body {
   font-size: 8rem;
   color: #f0f0f0; /* Slightly darker than the other whites for more of a visual match */
   text-shadow:3px 3px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
 }
 
 .weather {

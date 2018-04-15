@@ -10,7 +10,12 @@ const weatherSelector = document.querySelector('.weather');
 const iconSelector = document.querySelector('.weatherIcon');
 const citySelector = document.querySelector('.location');
 let weather;
+let today;
 const displayContainer = document.querySelector('.display_container');
+const weatherContainer = document.querySelector('.weather_container');
+let userLat;
+let userLong;
+let unitsSymbol = 'F';
 
 function timer(seconds) {
   // clear any existing timers
@@ -115,7 +120,7 @@ displayClock();
 
 
 
-// Date Stuff
+// Date Stuff *WIP* Need to change the suffix for date (21st, 22nd, 23rd, etc)
 
 function todaysDate() {
   let bacon = new Date();
@@ -166,21 +171,20 @@ function getLocation() {
 
 function showPosition(position) {
   console.log("Latitude: " + position.coords.latitude);
-  let userLat = position.coords.latitude;
+  userLat = position.coords.latitude;
   console.log("Longitude: " + position.coords.longitude);
-  let userLong = position.coords.longitude;
+  userLong = position.coords.longitude;
   weatherCenter(userLat, userLong);
 }
 
 getLocation();
 
 
-
 // Weather Stuff
 
 function readJSON(file) {
   const request = new XMLHttpRequest();
-  request.open('GET', file, false);
+  request.open('GET', file, false); // Needs to be set to true to avoid XML error, but breaks app when true. userLat & userLong are undefined at function runtime
   request.send(null);
   if (request.status == 200)
     return request.responseText;
@@ -190,7 +194,7 @@ function readJSON(file) {
 
 function weatherCenter(userLat, userLong) {
   weather = JSON.parse(readJSON('https://api.openweathermap.org/data/2.5/forecast?lat=' + userLat + '&lon=' + userLong + '&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
-  let today = Math.round(weather.list[0].main.temp);
+  today = Math.round(weather.list[0].main.temp);
   let city = weather.city.name;
   let desc = weather.list[0].weather[0].main;
   let weatherCode = weather.list[0].weather[0].id;
@@ -200,12 +204,32 @@ function weatherCenter(userLat, userLong) {
 
   if (weatherCode) { 
     iconSelector.classList.add(icon);
-    weatherSelector.textContent = today + '°' + 'F';
+    weatherSelector.textContent = today + '°' + unitsSymbol;
     citySelector.textContent = city;
   } else { 
     weatherSelector.textContent = 'No Weather Info Available';
   }
-  console.log('Current Weather in ' + city + ' is ' + today + '°' + ' F and ' + desc + 'ing');
+  console.log('Current Weather in ' + city + ' is ' + today + ' °' + unitsSymbol + ' and ' + desc + 'ing');
   setTimeout(weatherCenter, 60000);
 };
 
+function unitsChange() {
+  if (unitsSymbol == 'F') {
+    const todayInC = Math.round((today - 32) * .5556);
+    unitsSymbol = 'C';
+    weatherSelector.textContent = todayInC + '°' + unitsSymbol;
+    console.log(todayInC + ' °' + unitsSymbol);
+  }
+  else {
+    unitsSymbol = 'F';
+    weatherSelector.textContent = today + '°' + unitsSymbol;
+  }
+}
+
+
+iconSelector.addEventListener('click', function() {
+    unitsChange();
+});
+
+
+// Attempting to make click event on weather icon to swap today to celcius. Undo it if necessary. *WIP* *URGENT*
