@@ -42,13 +42,23 @@ function timer(seconds) {
       console.log('DONE');
       alarm.play();
     }
+    else if (secondsLeft <= 20 && secondsLeft >= 5) {
+      document.body.style.background = '#fb4f4f';
+      document.body.style.transition = '4s linear';
+      console.log(secondsLeft + ' Seconds Left!');
+    }
 
     // Work In Progress for Stop Button
 
     if (!alarm.paused || alarm.currentTime) {
-      test.style.background = 'red';
-      test.style.transition = '1.6s ease';
+      // test.style.background = 'red';
+      // test.style.transition = '1.6s ease';
+      document.body.style.background = 'green';
     } 
+
+    if (alarm.paused) {
+      // document.body.style.background = 'linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%)';
+    }
 
     // Not transitioning back
 
