@@ -53,7 +53,6 @@ function timer(seconds) {
     if (!alarm.paused || alarm.currentTime) {
       // test.style.background = 'red';
       // test.style.transition = '1.6s ease';
-      document.body.style.background = 'green';
     } 
 
     if (alarm.paused) {
@@ -69,6 +68,13 @@ function timer(seconds) {
     // display it
     displayTimeLeft(secondsLeft);
   }, 1000);
+}
+
+// *WIP* Still need a way to transition back to normal background gradient
+
+function audioEnd() {
+  document.body.style.background = 'linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%)';
+  console.log('It worked :DDD');
 }
 
 function displayTimeLeft(seconds) {
@@ -110,6 +116,8 @@ document.customForm.addEventListener('submit', function(e) {
   this.reset();
 });
 
+// *WIP* Still need to bring clock element back into DOM when timer hits 0 and alarm stops playing
+
 function displayClock() {
   const now = new Date();
   const hour = now.getHours();
@@ -134,9 +142,6 @@ function displayClock() {
 
 displayClock();
 
-
-
-// Date Stuff *WIP* Need to change the suffix for date (21st, 22nd, 23rd, etc)
 
 function todaysDate() {
   let bacon = new Date();
