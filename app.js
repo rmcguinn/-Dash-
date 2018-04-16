@@ -42,10 +42,11 @@ function timer(seconds) {
       console.log('DONE');
       alarm.play();
     }
-    else if (secondsLeft <= 20 && secondsLeft >= 5) {
+    else if (secondsLeft <= 24 && secondsLeft >= 5) {
       document.body.style.background = '#fb4f4f';
+      document.body.style.backgroundImage = 'url(img/checkered-pattern.png)';
+      document.body.style.backgroundImage = 'url(img/checkered-pattern.png)';
       document.body.style.transition = '4s linear';
-      console.log(secondsLeft + ' Seconds Left!');
     }
 
     // Work In Progress for Stop Button
@@ -74,7 +75,6 @@ function timer(seconds) {
 
 function audioEnd() {
   document.body.style.background = 'linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%)';
-  console.log('It worked :DDD');
 }
 
 function displayTimeLeft(seconds) {
@@ -111,6 +111,8 @@ buttons.forEach(button => button.addEventListener('click', startTimer));
 document.customForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const mins = this.minutes.value;
+  clock.style.display = 'none';
+  timerDisplay.style.margin = '50px';
   console.log(mins);
   timer(mins * 60);
   this.reset();
