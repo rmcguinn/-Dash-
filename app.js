@@ -1,3 +1,6 @@
+// *WIP* Add state info onto location via Coordinates from google geocoding api
+
+
 let countdown;
 const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
@@ -16,6 +19,8 @@ const weatherContainer = document.querySelector('.weather_container');
 let userLat;
 let userLong;
 let unitsSymbol = 'F';
+let googleAPI;
+let state;
 
 function timer(seconds) {
   // clear any existing timers
@@ -226,11 +231,14 @@ function readJSON(file) {
 
 function weatherCenter(userLat, userLong) {
   weather = JSON.parse(readJSON('https://api.openweathermap.org/data/2.5/forecast?lat=' + userLat + '&lon=' + userLong + '&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial'));
+  googleAPI = JSON.parse(readJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + userLat + ',' + userLong + '&key=AIzaSyAaArZPBLx2r7cdmxvRMzcr_I0MuXA7uxA'));
   today = Math.round(weather.list[0].main.temp);
   let city = weather.city.name;
   let desc = weather.list[0].weather[0].main;
   let weatherCode = weather.list[0].weather[0].id;
   let icon = 'wi-owm-' + weatherCode;
+  state = googleAPI.results[0].address_components[4].short_name;
+  console.log('State: ' + state);
 
   // Displays error message if no weather info is found
 
@@ -239,7 +247,7 @@ function weatherCenter(userLat, userLong) {
   if (weatherCode) { 
     iconSelector.classList.add(icon);
     weatherSelector.textContent = today + '°' + unitsSymbol;
-    citySelector.textContent = city;
+    citySelector.textContent = city + ', ' + state;
   } else { 
     weatherSelector.textContent = 'No Weather Info Available';
   }
