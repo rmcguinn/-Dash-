@@ -27,10 +27,6 @@ function timer(seconds) {
 
   // Runs the clock function when there isn't a timer running
 
-  // if (secondsLeft < 0) { 
-  //   displayClock();
-  // }
-
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     // check if we should stop it!
@@ -41,6 +37,7 @@ function timer(seconds) {
     else if (secondsLeft == 0) {
       console.log('DONE');
       alarm.play();
+      alarm.volume = 0.2;
     }
     else if (secondsLeft <= 24 && secondsLeft >= 5) {
       document.body.style.background = '#fb4f4f';
@@ -75,6 +72,11 @@ function timer(seconds) {
 
 function audioEnd() {
   document.body.style.background = 'linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%)';
+  timerDisplay.textContent = '';
+  endTime.textContent = '';
+  displayContainer.style.display = 'none';
+  clock.style.display = 'block';
+
 }
 
 function displayTimeLeft(seconds) {
@@ -113,7 +115,7 @@ document.customForm.addEventListener('submit', function(e) {
   const mins = this.minutes.value;
   clock.style.display = 'none';
   timerDisplay.style.margin = '50px';
-  console.log(mins);
+  console.log('Custom Interval: ' + mins + ' minutes');
   timer(mins * 60);
   this.reset();
 });
@@ -139,6 +141,7 @@ function displayClock() {
   }
   else {
     clock.textContent = `${adjustedHour}:${minutes < 10 ? '0' : ''}${minutes} ${ampm}`;
+    clock.style.display = 'block';
   }
 }
 
@@ -231,6 +234,8 @@ function weatherCenter(userLat, userLong) {
 
   // Displays error message if no weather info is found
 
+  // *WIP* setTimout is broken. Long and Lat are undefined when rerun
+
   if (weatherCode) { 
     iconSelector.classList.add(icon);
     weatherSelector.textContent = today + '°' + unitsSymbol;
@@ -239,7 +244,7 @@ function weatherCenter(userLat, userLong) {
     weatherSelector.textContent = 'No Weather Info Available';
   }
   console.log('Current Weather in ' + city + ' is ' + today + ' °' + unitsSymbol + ' and ' + desc + 'ing');
-  setTimeout(weatherCenter, 45000);
+  setTimeout(weatherCenter, 60000);
 };
 
 function unitsChange() {
@@ -247,12 +252,12 @@ function unitsChange() {
     const todayInC = Math.round((today - 32) * .5556);
     unitsSymbol = 'C';
     weatherSelector.textContent = todayInC + '°' + unitsSymbol;
-    console.log('Converted to Celcius');
+    console.log('Converted temperature to Celcius');
   }
   else {
     unitsSymbol = 'F';
     weatherSelector.textContent = today + '°' + unitsSymbol;
-    console.log('Converted to Fahrenheit');
+    console.log('Converted temperature to Fahrenheit');
   }
 }
 
