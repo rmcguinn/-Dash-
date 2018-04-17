@@ -6,6 +6,7 @@ const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
 const buttons = document.querySelectorAll('[data-time]');
 const alarm = document.querySelector('.alarmFX');
+const tick = document.querySelector('.tickFX');
 const clock = document.querySelector('.clock');
 const dateSelector = document.querySelector('.date');
 const weatherSelector = document.querySelector('.weather');
@@ -20,6 +21,8 @@ let userLong;
 let unitsSymbol = 'F';
 let googleAPI;
 let state;
+const mute = document.querySelector('.mute');
+
 
 function timer(seconds) {
   // clear any existing timers
@@ -28,9 +31,9 @@ function timer(seconds) {
   const then = now + seconds * 1000;
   displayTimeLeft(seconds);
   displayEndTime(then);
-
+  
   // Runs the clock function when there isn't a timer running
-
+  
   countdown = setInterval(() => {
     const secondsLeft = Math.round((then - Date.now()) / 1000);
     // check if we should stop it!
@@ -41,10 +44,13 @@ function timer(seconds) {
     else if (secondsLeft == 0) {
       console.log('Timer Expired');
       alarm.play();
+      mute.style.display = 'block';
     }
     // Starts countdown animation *WIP* Animation inconsistent
     else if (secondsLeft <= 10) { 
       timerDisplay.classList.add('shake');
+      tick.play();
+      
     }
     else if (secondsLeft <= 30 && secondsLeft >= 5) {
       document.body.style.background = '#fb4f4f';
@@ -52,7 +58,7 @@ function timer(seconds) {
       document.body.style.backgroundImage = 'url(img/checkered-pattern.png)';
       document.body.style.transition = '3.5s linear';
     }
-
+    
     // display it
     displayTimeLeft(secondsLeft);
   }, 1000);
@@ -66,7 +72,14 @@ function audioEnd() {
   endTime.textContent = '';
   displayContainer.style.display = 'none';
   clock.style.display = 'block';
+  mute.style.display = 'none';
 }
+
+mute.addEventListener('click', function() {
+  alarm.pause();
+  alarm.currentTime = 0;
+  audioEnd();
+});
 
 function displayTimeLeft(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -123,7 +136,6 @@ function displayClock() {
   const refresh = setTimeout(displayClock, 500);
   if (countdown) { 
     // *WIP* needs to be refactored.  
-
     // clock.textContent = "";
     // clock.style.display = 'none';
     // timerDisplay.style.margin = '0';
@@ -147,7 +159,7 @@ function todaysDate() {
   else if (date == '2' || date == '22') suffix = 'nd';
   else if (date == '3' || date == '23') suffix = 'rd';
   else suffix = 'th';
-
+  
   if (day == 1) day = 'Sunday';
   else if (day == 2) day = 'Monday';
   else if (day == 3) day = 'Tuesday';
@@ -170,7 +182,7 @@ function todaysDate() {
   else if (month == 10) month = 'October';
   else if (month == 11) month = 'November';
   else if (month == 12) month = 'December';
-
+  
   console.log('Today is ' + day + ' ' + month + ' ' + date + suffix);
   dateSelector.textContent = day + ' ' + month + ' ' + date + suffix;
 }
@@ -208,7 +220,7 @@ function readJSON(file) {
   request.open('GET', file, false); // Needs to be set to true to avoid XML error, but breaks app when true. userLat & userLong are undefined at function runtime
   request.send(null);
   if (request.status == 200)
-    return request.responseText;
+  return request.responseText;
 };
 
 // Seattle JSON https://api.openweathermap.org/data/2.5/forecast?id=5809844&APPID=4ed5e89afca7527f724a4768d95de224&units=imperial
@@ -223,11 +235,11 @@ function weatherCenter(userLat, userLong) {
   let icon = 'wi-owm-' + weatherCode;
   state = googleAPI.results[0].address_components[4].short_name;
   console.log('State: ' + state);
-
+  
   // Displays error message if no weather info is found
-
+  
   // *WIP* setTimout is broken. Long and Lat are undefined when rerun
-
+  
   if (weatherCode) { 
     iconSelector.classList.add(icon);
     weatherSelector.textContent = today + '°' + unitsSymbol;
@@ -255,5 +267,5 @@ function unitsChange() {
 
 
 iconSelector.addEventListener('click', function() {
-    unitsChange();
+  unitsChange();
 });
