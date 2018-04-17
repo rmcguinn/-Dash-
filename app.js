@@ -1,4 +1,4 @@
-// *WIP* Add state info onto location via Coordinates from google geocoding api
+// *WIP* After alarm tone plays, time information isn't accurate
 
 
 let countdown;
@@ -6,7 +6,6 @@ const timerDisplay = document.querySelector('.display__time-left');
 const endTime = document.querySelector('.display__end-time');
 const buttons = document.querySelectorAll('[data-time]');
 const alarm = document.querySelector('.alarmFX');
-const test = document.querySelector('.timer__controls');
 const clock = document.querySelector('.clock');
 const dateSelector = document.querySelector('.date');
 const weatherSelector = document.querySelector('.weather');
@@ -40,33 +39,19 @@ function timer(seconds) {
       return;
     } 
     else if (secondsLeft == 0) {
-      console.log('DONE');
+      console.log('Timer Expired');
       alarm.play();
-      alarm.volume = 0.2;
     }
-    else if (secondsLeft <= 24 && secondsLeft >= 5) {
+    // Starts countdown animation *WIP* Animation inconsistent
+    else if (secondsLeft <= 10) { 
+      timerDisplay.classList.add('shake');
+    }
+    else if (secondsLeft <= 30 && secondsLeft >= 5) {
       document.body.style.background = '#fb4f4f';
       document.body.style.backgroundImage = 'url(img/checkered-pattern.png)';
       document.body.style.backgroundImage = 'url(img/checkered-pattern.png)';
-      document.body.style.transition = '4s linear';
+      document.body.style.transition = '3.5s linear';
     }
-
-    // Work In Progress for Stop Button
-
-    if (!alarm.paused || alarm.currentTime) {
-      // test.style.background = 'red';
-      // test.style.transition = '1.6s ease';
-    } 
-
-    if (alarm.paused) {
-      // document.body.style.background = 'linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%)';
-    }
-
-    // Not transitioning back
-
-    // else if (alarm.currentTime == 0) {
-    //   test.style.background = "none";
-    // }
 
     // display it
     displayTimeLeft(secondsLeft);
@@ -81,7 +66,6 @@ function audioEnd() {
   endTime.textContent = '';
   displayContainer.style.display = 'none';
   clock.style.display = 'block';
-
 }
 
 function displayTimeLeft(seconds) {
@@ -154,9 +138,9 @@ displayClock();
 
 
 function todaysDate() {
-  let bacon = new Date();
-  let date = bacon.getDate();
-  let day = bacon.getDay() + 1;
+  let newDate = new Date();
+  let date = newDate.getDate();
+  let day = newDate.getDay() + 1;
   let suffix = 'th';
   
   if (date == '1' || date == '21' || date == '31') suffix = 'st';
@@ -172,7 +156,7 @@ function todaysDate() {
   else if (day == 6) day = 'Friday';
   else if (day == 7) day = 'Saturday';
   
-  let month = bacon.getMonth() + 1;
+  let month = newDate.getMonth() + 1;
   
   if (month == 1) month = 'January';
   else if (month == 2) month = 'February';
