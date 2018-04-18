@@ -78,6 +78,7 @@ function audioEnd() {
 mute.addEventListener('click', function() {
   alarm.pause();
   alarm.currentTime = 0;
+  timerDisplay.classList.remove('shake');
   audioEnd();
 });
 
