@@ -12,6 +12,7 @@ const dateSelector = document.querySelector('.date');
 const weatherSelector = document.querySelector('.weather');
 const iconSelector = document.querySelector('.weatherIcon');
 const citySelector = document.querySelector('.location');
+const locationContainer = document.querySelector('.location_container');
 let weather;
 let today;
 const displayContainer = document.querySelector('.display_container');
@@ -245,8 +246,12 @@ function weatherCenter(userLat, userLong) {
     iconSelector.classList.add(icon);
     weatherSelector.textContent = today + '°' + unitsSymbol;
     citySelector.textContent = city + ', ' + state;
-  } else { 
+    weatherContainer.style.display = 'flex';
+    locationContainer.style.display = 'block';
+    mute.style.marginTop = '30px';
+  } else if (!userLat) { 
     weatherSelector.textContent = 'No Weather Info Available';
+    console.log('BAJLSDFL');
   }
   console.log('Current Weather in ' + city + ' is ' + today + ' °' + unitsSymbol + ' and ' + desc + 'ing');
   setTimeout(weatherCenter, 60000);

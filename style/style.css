@@ -229,7 +229,7 @@ body {
 }
 
 .weather_container {
-  display: flex;
+  display: none;
   height: 10vh;
   align-items: center;
 }
@@ -250,6 +250,10 @@ body {
   font-size: 6rem;
 }
 
+.location_container {
+  display: none;
+}
+
 .location {
   font-size: 3rem;
   color: #ddd;
@@ -263,7 +267,7 @@ body {
   border: 3px solid #fff;
   color: #fff;
   font-size: 2rem;
-  margin-top: 30px;
+  margin-top: 0;
   cursor: pointer;
   display: none;
   /* text-transform: uppercase;
