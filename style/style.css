@@ -1,6 +1,6 @@
 html {
   box-sizing: border-box;
-  font-size: 10px;
+  font-size: 62.5%;
   background: #8E24AA;
   background: linear-gradient(45deg,  #42a5f5 0%,#478ed1 50%,#0d47a1 100%);
   height: 100%;
@@ -28,13 +28,13 @@ body {
 
 @keyframes shake {
   0% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   1.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   2.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   3.333% {
     transform: translate(0, 0);
@@ -43,10 +43,10 @@ body {
     transform: translate(0, 0);
   }
   11.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   12.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   13.333% {
     transform: translate(0, 0);
@@ -55,10 +55,10 @@ body {
     transform: translate(0, 0);
   }
   21.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   22.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   23.333% {
     transform: translate(0, 0);
@@ -67,10 +67,10 @@ body {
     transform: translate(0, 0);
   }
   31.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   32.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   33.333% {
     transform: translate(0, 0);
@@ -79,10 +79,10 @@ body {
     transform: translate(0, 0);
   }
   41.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   42.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   43.333% {
     transform: translate(0, 0);
@@ -91,10 +91,10 @@ body {
     transform: translate(0, 0);
   }
   51.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   52.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   53.333% {
     transform: translate(0, 0);
@@ -103,10 +103,10 @@ body {
     transform: translate(0, 0);
   }
   61.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   62.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   63.333% {
     transform: translate(0, 0);
@@ -115,10 +115,10 @@ body {
     transform: translate(0, 0);
   }
   71.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   72.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   73.333% {
     transform: translate(0, 0);
@@ -127,10 +127,10 @@ body {
     transform: translate(0, 0);
   }
   81.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   82.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   83.333% {
     transform: translate(0, 0);
@@ -139,10 +139,10 @@ body {
     transform: translate(0, 0);
   }
   91.111% {
-    transform: translate(-10px, 0);
+    transform: translate(-1rem, 0);
   }
   92.222% {
-    transform: translate(10px, 0);
+    transform: translate(1rem, 0);
   }
   93.333% {
     transform: translate(0, 0);
@@ -157,15 +157,15 @@ body {
   font-size: 6rem;
   margin: 0;
   color:#f5f5f5;
-  text-shadow:4px 4px 0 rgba(0, 0, 0, 0.05);
+  text-shadow: .4rem .4rem 0 rgba(0, 0, 0, 0.05);
 }
 
 .display__time-left, .clock {
   font-weight: 100;
   font-size: 20rem;
-  margin: 80px 0 80px 0;
+  margin: 8rem 0 8rem 0;
   color:white;
-  text-shadow:4px 4px 0 rgba(0,0,0,0.05);
+  text-shadow: .4rem .4rem 0 rgba(0,0,0,0.05);
 }
 
 .timer {
@@ -202,8 +202,8 @@ body {
   font-size: 2rem;
   text-transform: uppercase;
   background:rgba(0,0,0,0.1);
-  border-bottom:3px solid rgba(0,0,0,0.2);
-  border-right:1px solid rgba(0,0,0,0.2);
+  border-bottom: .3rem solid rgba(0,0,0,0.2);
+  border-right: .1rem solid rgba(0,0,0,0.2);
   padding:1rem;
   font-family: 'Inconsolata', monospace;
 }
@@ -240,15 +240,15 @@ body {
 .weatherIcon {
   font-size: 8rem;
   color: #f0f0f0; /* Slightly darker than the other whites for more of a visual match */
-  text-shadow:3px 3px 0 rgba(0, 0, 0, 0.05);
+  text-shadow: .3rem .3rem 0 rgba(0, 0, 0, 0.05);
   cursor: pointer;
 }
 
 .weather {
   display: inline-block;
-  margin: 0 0 0 40px;
+  margin: 0 0 0 4rem;
   color:#f5f5f5;
-  text-shadow:4px 4px 0 rgba(0, 0, 0, 0.05);
+  text-shadow: .4rem .4rem 0 rgba(0, 0, 0, 0.05);
   font-weight: 100;
   font-size: 6rem;
 }
@@ -261,20 +261,18 @@ body {
   font-size: 3rem;
   color: #ddd;
   font-weight: 100;
-  margin: 25px 0 0 0;
+  margin: 2.5rem 0 0 0;
 }
 
 .mute {
-  padding: 15px 75px;
+  padding: 1.5rem 7.5rem;
   background: transparent;
-  border: 3px solid #fff;
+  border: .3rem solid #fff;
   color: #fff;
   font-size: 2rem;
   margin-top: 0;
   cursor: pointer;
   display: none;
-  /* text-transform: uppercase;
-  letter-spacing: 1.5px; */
 }
 
 .show_small {
@@ -290,7 +288,7 @@ body {
 
   
   .display {
-    padding: 0 20px;
+    padding: 0 2rem;
   }
   
   .date {
@@ -298,7 +296,7 @@ body {
   }
   
   .clock {
-    margin: 35px 0;
+    margin: 3.5rem 0;
     font-size: 9rem;
   }
   
@@ -308,7 +306,7 @@ body {
   
   .weather {
     font-size: 5rem;
-    margin-left: 20px;
+    margin-left: 2rem;
   }
   
   .location {
@@ -321,7 +319,7 @@ body {
 
 @media only screen and (max-width: 544px) {
   #custom {
-    padding: 0 1rem;
+    padding: 0 2rem;
   }
   .show_small {
     display: block;
@@ -329,7 +327,7 @@ body {
     width: 100vw;
     flex-wrap: wrap;
     flex: none;
-    margin: 15px 0;
+    margin: 1.5rem 0;
     font-size: 2.5rem;
     font-weight: 100;
   }
