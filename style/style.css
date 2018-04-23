@@ -295,15 +295,6 @@ body {
     font-size: 3rem;
   }
   
-  .clock {
-    margin: 3.5rem 0;
-    font-size: 9rem;
-  }
-  
-  .weatherIcon {
-    font-size: 6.5rem;
-  }
-  
   .weather {
     font-size: 5rem;
     margin-left: 2rem;
@@ -330,6 +321,24 @@ body {
     margin: 1.5rem 0;
     font-size: 2.5rem;
     font-weight: 100;
+  }
+
+  .weatherIcon {
+    font-size: 6.5rem;
+  }
+  
+  .display__time-left {
+    margin: 3.5rem 0;
+    font-size: 10rem;
+  }
+  
+  .clock {
+    margin: 3.5rem 0;
+    font-size: 9rem;
+  }
+
+  .display__end-time {
+    font-size: 3rem;
   }
   
   ::-webkit-input-placeholder {
